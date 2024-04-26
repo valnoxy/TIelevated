@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TIelevated", "TIelevated\TIelevated.csproj", "{CFF44996-0F55-4444-A463-CC3232673396}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CFF44996-0F55-4444-A463-CC3232673396}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFF44996-0F55-4444-A463-CC3232673396}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFF44996-0F55-4444-A463-CC3232673396}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFF44996-0F55-4444-A463-CC3232673396}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D5E6FB29-FA05-4521-B711-246864293196}
+	EndGlobalSection
+EndGlobal
