@@ -39,15 +39,15 @@
 
 ---
 
-> [!WARNING]
+> [!CAUTION]
 > With great power comes great responsibility! Think before you type or elevate any process and respect the privacy of others.
 
 # 🚀Introduction
-TIelevated is an application that makes it possible to run Windows processes in the context of the built-in user **TrustedInstaller**.  It provides the ability to run processes with the TrustedInstaller user's permissions, which is normally reserved for system files and folders.
+TIelevated is an application that makes it possible to run Windows processes in the context of the built-in user **TrustedInstaller** (NT-AUTHORITY\SYSTEM).  It provides the ability to run processes with the TrustedInstaller user's permissions, which is normally reserved for system files and folders.
 This allows system files, for example, to be modified without problems and folders to be accessed that are not even accessible to the administrator.
 
 > [!NOTE]
-> TIelevated supports Windows 7 to Windows 11 (including server versions and beta versions).
+> TIelevated supports Windows 7 to Windows 11 (including server versions and beta versions). You need at least Administrator permission to run this application. 
 
 # 🤸 Usage
 ## 💻 1. Elevated Command Prompt
