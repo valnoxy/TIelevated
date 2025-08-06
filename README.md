@@ -30,7 +30,7 @@
     <a href="https://github.com/valnoxy/TIelevated/discussions/">Discussions</a>
     <br />
     <br />
-    🎉 Version 1.3.1 is out. Check out the release notes
+    🎉 Version 1.3.2 is out. Check out the release notes
     <a href="https://github.com/valnoxy/TIelevated/releases">here</a>.
     <br />
     <br />
@@ -55,6 +55,9 @@ If you run TIelevated without any arguments, an elevated command prompt shell is
 
 ![Default Start](assets/default-start.png)
 
+> [!NOTE]
+> Since version 1.3.2, TIelevated includes a UAC bypass. To use it, you must define ```/uac``` as an argument.
+
 ## ⚙️ 2. External Programs
 You can run external programs via an extended command prompt or simply drag and drop the application onto TIelevated.
 
@@ -62,6 +65,6 @@ You can run external programs via an extended command prompt or simply drag and 
 TIelevated is licensed under [GPL-3.0](https://github.com/valnoxy/TIelevated/blob/main/LICENSE).
 
 <hr>
-<h6 align="center">© 2018 - 2024 valnoxy. All Rights Reserved. 
+<h6 align="center">© 2018 - 2025 valnoxy. All Rights Reserved. 
 <br>
 By Jonas Günner &lt;jonas@exploitox.de&gt;</h6>

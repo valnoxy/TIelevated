@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Security.Principal;
 using System.Text;
 using TIelevated.Common;
 
@@ -21,7 +22,52 @@ namespace TIelevated
             Output.WriteLine(Copyright!);
             //Output.WriteLine("Current AppPath: " + AppPath, Output.Style.Information);
 
+            var uacFolder = Path.Combine(Path.GetTempPath(), "TIelevated");
+            if (Directory.Exists(uacFolder))
+            {
+                var processes = Process.GetProcessesByName("msdt");
+                foreach (var process in processes)
+                {
+                    try
+                    {
+                        process.Kill();
+                    }
+                    catch (Exception ex)
+                    {
+                        Output.WriteLine($"Failed to kill msdt.exe: {ex.Message}", Output.Style.Warning);
+                    }
+                }
+
+                // Remove folder from Path variable
+                var currentPathVariable = Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
+                if (string.IsNullOrEmpty(currentPathVariable)) return;
+                var pathEntries = currentPathVariable.Split([';'], StringSplitOptions.RemoveEmptyEntries);
+                var newPathEntries = pathEntries.Where(p => !p.Equals(uacFolder, StringComparison.OrdinalIgnoreCase)).ToList();
+                var newPathVariable = string.Join(";", newPathEntries);
+                if (currentPathVariable != newPathVariable)
+                {
+                    Environment.SetEnvironmentVariable("Path", newPathVariable, EnvironmentVariableTarget.User);
+                }
+            }
+
             // Validate input
+            if (args.Length > 0 && args[0].Equals("/uac", StringComparison.CurrentCultureIgnoreCase))
+            {
+                Output.WriteLine("Bypassing UAC prompt ...", Output.Style.Information);
+                Output.WriteLine("Preparing environment ...", Output.Style.Information);
+                UACBypass.Prepare(AppPath!);
+                Output.WriteLine("Starting msdt.exe process ...", Output.Style.Information);
+                UACBypass.RunPayload();
+                Environment.Exit(0);
+            }
+
+            if (IsAdministrator() == false)
+            {
+                ElevateAsAdmin(AppPath!, string.Join(" ", args));
+                Environment.Exit(740);
+                return;
+            }
+
             if (args.Length > 0 && args[0].Equals("/switchti", StringComparison.CurrentCultureIgnoreCase))
             {
                 Output.WriteLine("Parsing command line ...", Output.Style.Information);
@@ -217,6 +263,23 @@ namespace TIelevated
                     AppPath!, $" /SwitchTI /Dir:\"{dirPath.Replace("\"", "")}\" /Run:\"{exe}\" {arguments}"); //ARGUMENTS
             }
         }
+        
+        private static bool IsAdministrator()
+        {
+            var identity = WindowsIdentity.GetCurrent();
+            var principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
 
+        private static void ElevateAsAdmin(string exeName, string? arguments = null)
+        {
+            var startInfo = new ProcessStartInfo(exeName)
+            {
+                Verb = "runas",
+                UseShellExecute = true,
+                Arguments = arguments
+            };
+            Process.Start(startInfo);
+        }
     }
 }
